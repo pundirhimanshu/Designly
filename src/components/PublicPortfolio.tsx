@@ -75,7 +75,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
     if (!user.customCursor || user.customCursor === "default") return "auto";
     const animatedCursors = ["glow", "fluid", "cyber", "trail"];
     if (animatedCursors.includes(user.customCursor)) return "none";
-    return `url(/cursors/${user.customCursor}.svg), auto`;
+    return `url("/cursors/${user.customCursor}.svg"), auto`;
   };
 
   return (
