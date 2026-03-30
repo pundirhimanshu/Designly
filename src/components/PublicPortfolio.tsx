@@ -78,8 +78,16 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: `
+        html, body, * {
+          cursor: ${getCursorStyle()} !important;
+        }
+        a, button, [role="button"], .interactive {
+          cursor: ${getCursorStyle()} !important;
+        }
+      `}} />
       <AnimatedCursor type={user.customCursor} />
-      <div className={styles.wrapper} style={{ cursor: getCursorStyle() }}>
+      <div className={styles.wrapper}>
 
       {/* Dynamic Background */}
       {user.background && (
