@@ -11,7 +11,11 @@ import {
   ChevronRight, 
   Building2,
   Settings,
-  LogOut
+  LogOut,
+  Palette,
+  BarChart3,
+  Eye,
+  Pencil
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import ThemeDrawer from "./ThemeDrawer";
@@ -449,14 +453,14 @@ const Dashboard = () => {
                 title="Design"
                 onClick={() => setIsThemeDrawerOpen(true)}
               >
-                <img src="/Paint.png" alt="Design" width="20" height="20" />
+                <Palette size={20} color="#666" />
               </div>
               <div 
                 className={styles.iconBtn} 
                 title="Statistics"
                 onClick={() => router.push('/insights')}
               >
-                <img src="/statistics.png" alt="Stats" width="20" height="20" />
+                <BarChart3 size={20} color="#666" />
               </div>
               <div 
                 className={styles.iconBtn} 
@@ -469,7 +473,7 @@ const Dashboard = () => {
                   }
                 }}
               >
-                <img src="/Eye.png" alt="Preview" width="20" height="20" />
+                <Eye size={20} color="#666" />
               </div>
               </div>
             <button className={styles.launchBtn} onClick={() => setIsLaunchModalOpen(true)}>Launch</button>
@@ -538,7 +542,7 @@ const Dashboard = () => {
               <div className={styles.nameRow}>
                 <h1 className={styles.name}>{session?.user?.name || "User Name"}</h1>
                 <div className={styles.editBtn} onClick={() => setIsEditModalOpen(true)}>
-                  <img src="/edit.png" alt="Edit" width="16" height="16" />
+                  <Pencil size={14} color="#666" />
                 </div>
               </div>
               <p className={styles.bio}>
@@ -633,7 +637,7 @@ const Dashboard = () => {
                   </div>
                   <div className={styles.actions}>
                     <div className={`${styles.actionIcon} ${styles.editIconSmall}`}>
-                      <img src="/edit.png" alt="Edit" width="16" height="16" />
+                      <Pencil size={14} color="#666" />
                     </div>
                   </div>
                 </div>
@@ -688,7 +692,7 @@ const Dashboard = () => {
                         }}
                         style={{ cursor: 'pointer' }}
                       >
-                        <img src="/edit.png" alt="Edit" width="14" height="14" />
+                        <Pencil size={14} color="#666" />
                       </div>
                       {t.id && !t.id.startsWith('t') && (
                         <div 
@@ -757,7 +761,7 @@ const Dashboard = () => {
                     }}
                     style={{ cursor: 'pointer' }}
                   >
-                    <img src="/edit.png" alt="Edit" width="14" height="14" />
+                    <Pencil size={14} color="#666" />
                   </div>
                   {exp.id && !exp.id.startsWith('def') && (
                     <div 
