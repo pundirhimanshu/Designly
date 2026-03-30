@@ -18,7 +18,7 @@ export default function LaunchModal({ isOpen, onClose, domain, updatedAt, onUpda
 
   if (!isOpen) return null;
 
-  const fullDomain = `${domain}.designly.me`;
+  const fullDomain = `${domain}.designly.co.in`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(`https://${fullDomain}`);

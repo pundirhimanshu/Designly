@@ -117,12 +117,12 @@ const InsightsPage = () => {
                 </span>
                 {domain && (
                   <a 
-                    href={`https://${domain}.designly.me`} 
+                    href={`https://${domain}.designly.co.in`} 
                     target="_blank" 
                     className={styles.domainLink}
                     style={{ fontSize: '14px' }}
                   >
-                    {domain}.designly.me
+                    {domain}.designly.co.in
                   </a>
                 )}
               </div>

@@ -63,7 +63,7 @@ export default function SignupPage() {
             onChange={(e) => setDomain(e.target.value)}
             disabled={loading}
           />
-          <span className={styles.suffix}>.designly.me</span>
+          <span className={styles.suffix}>.designly.co.in</span>
         </div>
         
         {error && <p className={styles.errorText}>{error}</p>}
