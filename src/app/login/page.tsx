@@ -7,8 +7,9 @@ import authStyles from "../../components/AuthLayout.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
 
-export default function LoginPage() {
+function LoginContent() {
   const { status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -22,8 +23,6 @@ export default function LoginPage() {
   }, [status, router]);
 
   useEffect(() => {
-    // If we're not explicitly in the signup flow, clear any stale signup intention
-    // This Prevents the "Login Loop" if a user sees an error and then tries to login normally
     if (searchParams.get("from") !== "signup") {
       document.cookie = "designly_signup_intent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
@@ -104,5 +103,19 @@ export default function LoginPage() {
         </button>
       </div>
     </AuthLayout>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '100vh',
+      color: '#666'
+    }}>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
