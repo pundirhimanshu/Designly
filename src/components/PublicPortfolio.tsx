@@ -43,15 +43,41 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
     fetchData();
   }, [domain]);
 
-,ReplacementChunks:[{AllowMultiple:false,EndLine:59,ReplacementContent:
   React.useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Define getCursorStyle at the top so it's hoist-safe and usable in effects
+  const getCursorStyle = React.useCallback(() => {
+    if (!data?.user?.customCursor || data.user.customCursor === "default") return "auto";
+    const animatedCursors = ["glow", "fluid", "cyber", "trail"];
+    if (animatedCursors.includes(data.user.customCursor)) return "none";
+    
+    const cursorUrl = `https://designly.co.in/cursors/${data.user.customCursor}.svg`;
+    return `url("${cursorUrl}"), auto`;
+  }, [data?.user?.customCursor]);
+
+  React.useEffect(() => {
+    if (data?.user?.customCursor) {
+      const cursor = getCursorStyle();
+      document.documentElement.style.cursor = cursor;
+      document.body.style.cursor = cursor;
+      
+      const style = document.createElement('style');
+      style.id = 'dynamic-cursor-style';
+      style.innerHTML = `html, body, * { cursor: ${cursor} !important; }`;
+      document.head.appendChild(style);
+      
+      return () => {
+        document.documentElement.style.cursor = 'auto';
+        document.body.style.cursor = 'auto';
+        const existing = document.getElementById('dynamic-cursor-style');
+        if (existing) document.head.removeChild(existing);
+      };
+    }
+  }, [data?.user?.customCursor, getCursorStyle]);
 
   if (loading) {
     return (
@@ -71,36 +97,6 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
 
   const { user, works, testimonials, experiences } = data;
   const motionTransform = user.backgroundMotion ? `scale(${1.1 + scrollY * 0.0004})` : 'scale(1)';
-
-  const getCursorStyle = () => {
-    if (!user.customCursor || user.customCursor === "default") return "auto";
-    const animatedCursors = ["glow", "fluid", "cyber", "trail"];
-    if (animatedCursors.includes(user.customCursor)) return "none";
-    
-    // Force absolute main-domain URL for cursors just in case subdomain resolve is off
-    const cursorUrl = `https://designly.co.in/cursors/${user.customCursor}.svg`;
-    return `url("${cursorUrl}"), auto`;
-  };
-
-  React.useEffect(() => {
-    if (user?.customCursor) {
-      const cursor = getCursorStyle();
-      document.documentElement.style.cursor = cursor;
-      document.body.style.cursor = cursor;
-      
-      const style = document.createElement('style');
-      style.id = 'dynamic-cursor-style';
-      style.innerHTML = `html, body, * { cursor: ${cursor} !important; }`;
-      document.head.appendChild(style);
-      
-      return () => {
-        document.documentElement.style.cursor = 'auto';
-        document.body.style.cursor = 'auto';
-        const existing = document.getElementById('dynamic-cursor-style');
-        if (existing) document.head.removeChild(existing);
-      };
-    }
-  }, [user?.customCursor]);
 
   return (
     <>
