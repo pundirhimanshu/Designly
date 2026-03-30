@@ -1,0 +1,135 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FFF6E9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bgPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 4rem;
+  pointer-events: none;
+}
+
+.patternPill {
+  background: #FFF1DE;
+  height: 250px;
+  border-radius: 125px;
+}
+
+.card {
+  background: white;
+  width: 95%;
+  max-width: 500px;
+  padding: 4rem 2.5rem;
+  border-radius: 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.logo {
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-family: var(--font-roboto-serif);
+  font-size: 2.4rem;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Badge/Ticker Styles */
+.badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #171717;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  overflow: hidden;
+  margin-top: 3rem;
+}
+
+.roleScroller {
+  display: inline-block;
+  height: 24px;
+  overflow: hidden;
+  margin-left: 0.5rem;
+  position: relative;
+  text-align: left;
+  min-width: 180px;
+}
+
+.roleWrapper {
+  display: flex;
+  flex-direction: column;
+  animation: vertTicker 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+}
+
+.roleWrapper div {
+  height: 24px;
+  line-height: 24px;
+  font-weight: 900;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+@keyframes vertTicker {
+  0%, 30% { transform: translateY(0); }
+  33%, 63% { transform: translateY(-24px); }
+  66%, 96% { transform: translateY(-48px); }
+  100% { transform: translateY(0); }
+}
+
+.footer {
+  margin-top: 2.5rem;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.footerLink {
+  color: #FF5C00;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 0.4rem;
+  transition: opacity 0.2s;
+}
+
+.footerLink:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .bgPattern {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

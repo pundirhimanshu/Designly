@@ -1,0 +1,177 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.inputArea {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  min-height: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  margin-bottom: 16px;
+  cursor: text;
+}
+
+.inputArea:focus-within {
+  border-color: #F97316;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+  min-width: 120px;
+  padding: 4px 0;
+}
+
+.searchInput::placeholder {
+  color: #bbb;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 100px;
+  padding: 5px 12px 5px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+}
+
+.chip img {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}
+
+.chipRemove {
+  cursor: pointer;
+  margin-left: 4px;
+  font-size: 14px;
+  color: #999;
+  line-height: 1;
+}
+
+.chipRemove:hover {
+  color: #ff4d4d;
+}
+
+.suggestionsLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.suggestionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  overflow-y: auto;
+  max-height: 200px;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.suggestionChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 100px;
+  padding: 6px 14px 6px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.suggestionChip:hover {
+  border-color: #F97316;
+  background: #fff8f3;
+}
+
+.suggestionChip img {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}
+
+.selectedChip {
+  border-color: #F97316;
+  background: #fff3e8;
+}
+
+.primaryBtn {
+  width: 100%;
+  padding: 14px;
+  background: #F97316;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: auto;
+}
+
+.primaryBtn:hover {
+  background: #ea680c;
+  transform: scale(1.01);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

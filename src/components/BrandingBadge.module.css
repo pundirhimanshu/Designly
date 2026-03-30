@@ -1,0 +1,36 @@
+.badgeWrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 100px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  z-index: 3000;
+  border: 1px solid #f0f0f0;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.badgeWrapper:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+.logo {
+  height: 20px;
+  width: auto;
+}

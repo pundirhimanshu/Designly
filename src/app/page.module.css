@@ -1,0 +1,434 @@
+.container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header,
+.hero {
+  position: relative;
+}
+
+.header {
+  position: fixed; /* Fixed to stay at top during scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000; /* Ensure it floats above all other content */
+  pointer-events: none; /* Allow interaction with content behind the header padding */
+}
+
+.nav {
+  pointer-events: auto; /* Enable interaction for the nav itself */
+  background: #ffffff;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Stronger shadow for a premium floating look */
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loginLink {
+  font-weight: 500;
+  color: #171717;
+  font-size: 0.95rem;
+}
+
+.btnBlack {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.btnBlack:hover {
+  transform: scale(1.02);
+}
+
+.hero {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  max-width: 1100px;
+}
+
+.badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #171717;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px; /* Fixed height for the ticker container */
+  overflow: hidden;
+}
+
+.roleScroller {
+  display: inline-block;
+  height: 24px;
+  overflow: hidden;
+  margin-left: 0.5rem;
+  position: relative;
+  text-align: left;
+  min-width: 180px;
+}
+
+.roleWrapper {
+  display: flex;
+  flex-direction: column;
+  animation: vertTicker 9s cubic-bezier(0.645, 0.045, 0.355, 1) infinite;
+}
+
+.roleWrapper div {
+  height: 24px;
+  line-height: 24px;
+  font-weight: 900;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+@keyframes vertTicker {
+  0%, 30% { transform: translateY(0); }
+  33%, 63% { transform: translateY(-24px); }
+  66%, 96% { transform: translateY(-48px); }
+  100% { transform: translateY(0); }
+}
+
+.title {
+  font-family: var(--font-roboto-serif);
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 3rem;
+  max-width: 800px;
+}
+
+.ctaContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.inputWrapper {
+  background: #ffffff;
+  padding: 0.8rem 2.5rem;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  flex: 1;
+  max-width: 450px;
+}
+
+.domainInput {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  width: 100%;
+  padding: 0;
+}
+
+.domainInput::placeholder {
+  color: #999;
+}
+
+.suffix {
+  color: #666;
+  margin-left: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.btnOrange {
+  background-color: #FF5C00;
+  color: #ffffff;
+  border: none;
+  padding: 1.1rem 2.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(255, 92, 0, 0.2);
+}
+
+.btnOrange:hover {
+  transform: scale(1.02);
+}
+
+.subtext {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Avatar Positions and Styles */
+.avatar {
+  position: absolute;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  background: white;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.avatar1 {
+  top: 50px;
+  left: -120px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  animation-delay: 0s;
+}
+
+.avatar2 {
+  top: 20px;
+  right: -130px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  animation-delay: 1s;
+}
+
+.avatar3 {
+  top: 350px;
+  left: -100px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  animation-delay: 2s;
+}
+
+.avatar4 {
+  bottom: 120px;
+  right: -80px;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  animation-delay: 0.5s;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 4-Step Process Section */
+.stepsSection {
+  width: 100%;
+  padding: 6rem 2rem;
+  margin-top: 8rem; /* Added space between sections as requested */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFF6E9;
+}
+
+.stepsHeader {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.stepsTitle {
+  font-family: var(--font-roboto-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.stepsSubtitle {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.stepCard {
+  background: transparent; /* Remove redundant background as images have their own */
+  border-radius: 0;
+  padding: 0; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  overflow: visible; /* Allow images to show full shapes if needed */
+  min-height: 400px;
+}
+
+.stepCard:nth-child(even) {
+  margin-top: 4rem; /* Staggered effect */
+}
+
+.stepCard:hover {
+  transform: translateY(-5px);
+}
+
+.stepImageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure full image is visible */
+}
+
+/* Why Designly Section */
+.whySection {
+  width: 100%;
+  padding: 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFF6E9;
+  text-align: center;
+}
+
+.whySection h2 {
+  font-family: var(--font-roboto-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4rem;
+  max-width: 800px;
+}
+
+.dottedContainer {
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pillsGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 2rem;
+  justify-content: center;
+}
+
+.pill {
+  padding: 1.2rem 2.5rem;
+  border-radius: 100px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.pill:hover {
+  transform: scale(1.05);
+}
+
+.pillOrange { background-color: #FF5C00; }
+.pillBlue { background-color: #0047FF; }
+.pillPurple { background-color: #D000FF; }
+.pillPink { background-color: #FF006B; }
+
+/* Staggering the pills slightly as per reference */
+.pillsGrid > div:nth-child(1) { transform: translateX(-1rem); }
+.pillsGrid > div:nth-child(2) { transform: translateX(1rem) translateY(0.5rem); }
+.pillsGrid > div:nth-child(3) { transform: translateX(-2rem); }
+.pillsGrid > div:nth-child(4) { transform: translateX(2rem) translateY(-0.5rem); }
+
+/* Final Section */
+.finalSection {
+  width: 100%;
+  padding: 8rem 2rem 12rem 2rem; /* Extra padding at bottom for the pattern */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #FFF6E9;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.finalTitle {
+  font-family: var(--font-roboto-serif);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+}
+
+/* Ensure CTA container works well in Final Section */
+.finalSection .ctaContainer {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 3rem;
+}
+
+.finalSection .subtext {
+  position: relative;
+  z-index: 2;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .finalTitle {
+    font-size: 2.5rem;
+  }
+}
+
