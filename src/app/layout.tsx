@@ -6,6 +6,9 @@ import DomainSyncer from "../components/DomainSyncer";
 export const metadata: Metadata = {
   title: "Designly",
   description: "Design your story. Showcase your work with designly.",
+  icons: {
+    icon: "/Favi.svg",
+  },
 };
 
 export default function RootLayout({
