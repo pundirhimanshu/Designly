@@ -43,6 +43,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
     fetchData();
   }, [domain]);
 
+,ReplacementChunks:[{AllowMultiple:false,EndLine:59,ReplacementContent:
   React.useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
 
@@ -78,16 +79,26 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
     return `url("/cursors/${user.customCursor}.svg"), auto`;
   };
 
+  React.useEffect(() => {
+    if (user?.customCursor) {
+      const cursor = getCursorStyle();
+      document.body.style.cursor = cursor;
+      
+      const style = document.createElement('style');
+      style.id = 'dynamic-cursor-style';
+      style.innerHTML = `* { cursor: ${cursor} !important; }`;
+      document.head.appendChild(style);
+      
+      return () => {
+        document.body.style.cursor = 'auto';
+        const existing = document.getElementById('dynamic-cursor-style');
+        if (existing) document.head.removeChild(existing);
+      };
+    }
+  }, [user?.customCursor]);
+
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: `
-        html, body, * {
-          cursor: ${getCursorStyle()} !important;
-        }
-        a, button, [role="button"], .interactive {
-          cursor: ${getCursorStyle()} !important;
-        }
-      `}} />
       <AnimatedCursor type={user.customCursor} />
       <div className={styles.wrapper}>
 
