@@ -76,7 +76,10 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
     if (!user.customCursor || user.customCursor === "default") return "auto";
     const animatedCursors = ["glow", "fluid", "cyber", "trail"];
     if (animatedCursors.includes(user.customCursor)) return "none";
-    return `url("/cursors/${user.customCursor}.svg"), auto`;
+    
+    // Force absolute main-domain URL for cursors just in case subdomain resolve is off
+    const cursorUrl = `https://designly.co.in/cursors/${user.customCursor}.svg`;
+    return `url("${cursorUrl}"), auto`;
   };
 
   React.useEffect(() => {
