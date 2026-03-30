@@ -9,6 +9,7 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      role?: string | null;
       bio?: string | null;
       skills?: string[];
       works?: any[];
@@ -58,7 +59,7 @@ export const authOptions: NextAuthOptions = {
             console.warn("=== BLOCKED === Existing user tried to signup via signup flow");
             return "/login?error=EmailAlreadyInUse";
           }
-        } catch (e) { /* ignore cookie errors in test/edge cases */ }
+        } catch { /* ignore cookie errors in test/edge cases */ }
 
         console.log("=== ALLOWED === Returning user login");
         return true;
@@ -72,23 +73,23 @@ export const authOptions: NextAuthOptions = {
           console.log("=== ALLOWED === New user signup");
           return true;
         }
-      } catch (e) { /* ignore cookie errors */ }
+      } catch { /* ignore cookie errors */ }
 
       // New user tried to login directly without signing up
       console.warn("=== BLOCKED === Direct login without signup");
       return "/login?error=SignupRequired";
     },
 
-    async session({ session, user }) {
+    async session({ session, user }: any) {
       if (user && session.user) {
         session.user.id = user.id;
-        (session.user as any).role = (user as any).role;
-        (session.user as any).bio = (user as any).bio;
-        (session.user as any).skills = (user as any).skills;
-        (session.user as any).background = (user as any).background;
-        (session.user as any).backgroundBlur = (user as any).backgroundBlur;
-        (session.user as any).backgroundMotion = (user as any).backgroundMotion;
-        (session.user as any).customCursor = (user as any).customCursor;
+        session.user.role = user.role;
+        session.user.bio = user.bio;
+        session.user.skills = user.skills;
+        session.user.background = user.background;
+        session.user.backgroundBlur = user.backgroundBlur;
+        session.user.backgroundMotion = user.backgroundMotion;
+        session.user.customCursor = user.customCursor;
       }
       return session;
     },
