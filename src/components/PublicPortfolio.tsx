@@ -82,14 +82,16 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
   React.useEffect(() => {
     if (user?.customCursor) {
       const cursor = getCursorStyle();
+      document.documentElement.style.cursor = cursor;
       document.body.style.cursor = cursor;
       
       const style = document.createElement('style');
       style.id = 'dynamic-cursor-style';
-      style.innerHTML = `* { cursor: ${cursor} !important; }`;
+      style.innerHTML = `html, body, * { cursor: ${cursor} !important; }`;
       document.head.appendChild(style);
       
       return () => {
+        document.documentElement.style.cursor = 'auto';
         document.body.style.cursor = 'auto';
         const existing = document.getElementById('dynamic-cursor-style');
         if (existing) document.head.removeChild(existing);
