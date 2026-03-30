@@ -24,13 +24,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    const normalizedDomain = domain.toLowerCase();
+    
     // Save or Update domain (One domain per user)
     try {
       await prisma.domain.upsert({
         where: { userId: user.id },
-        update: { name: domain },
+        update: { name: normalizedDomain },
         create: {
-          name: domain,
+          name: normalizedDomain,
           userId: user.id
         }
       });

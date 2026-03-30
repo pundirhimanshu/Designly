@@ -23,10 +23,7 @@ export default async function middleware(req: NextRequest) {
   // Define allowed domains (main app)
   const allowedDomains = ["designly.co.in", "www.designly.co.in", "localhost:3000", "designly-five.vercel.app"];
   
-  // Extract subdomain
-  // In production: himanshu.designly.co.in -> himanshu
-  // In local: himanshu.localhost:3000 -> himanshu
-  const subdomain = hostname.split(".")[0];
+  const subdomain = hostname.split(".")[0].toLowerCase();
 
   // If we are on the main domain or a system subdomain, do nothing
   if (allowedDomains.includes(hostname) || subdomain === "www") {

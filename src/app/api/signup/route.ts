@@ -9,9 +9,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Domain is required' }, { status: 400 });
     }
 
+    const normalizedDomain = domain.toLowerCase();
+    
     // Check if domain exists
     const existingDomain = await prisma.domain.findUnique({
-      where: { name: domain }
+      where: { name: normalizedDomain }
     });
 
     if (existingDomain) {

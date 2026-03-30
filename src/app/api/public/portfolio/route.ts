@@ -12,9 +12,11 @@ export async function GET(req: Request) {
   }
 
   try {
+    const normalizedDomain = domain.toLowerCase();
+    
     // 1. Find the user by domain
     const domainRecord = await prisma.domain.findUnique({
-      where: { name: domain },
+      where: { name: normalizedDomain },
       select: {
         user: {
           select: {
