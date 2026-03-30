@@ -20,7 +20,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/public/portfolio?domain=${domain}`, {
+        const res = await fetch(`/api/public/portfolio?domain=${domain}&t=${Date.now()}`, {
           cache: 'no-store'
         });
         if (res.ok) {
