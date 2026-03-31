@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./CaseStudyEditor.module.css";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, User, Sparkles } from "lucide-react";
+import { ArrowLeft, User, Sparkles, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CaseStudyEditorProps {
@@ -26,6 +26,7 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
   });
 
   const editorRef = React.useRef<HTMLDivElement>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -75,11 +76,33 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
     }
   };
 
-  const execCommand = (command: string, value: string = "") => {
-    document.execCommand(command, false, value);
+  const execCommand = (command: string, value: string | null = null) => {
+    document.execCommand(command, false, value as string);
     if (editorRef.current) {
       editorRef.current.focus();
     }
+  };
+
+  const handleImageInsert = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Please select an image smaller than 2MB.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const dataUrl = reader.result as string;
+        // Focus the editor before inserting
+        if (editorRef.current) {
+          editorRef.current.focus();
+          execCommand('insertImage', dataUrl);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+    // Clear the input so the same file can be selected again
+    e.target.value = "";
   };
 
   if (loading) {
@@ -195,13 +218,25 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
           <button className={styles.toolbarButton} onClick={() => execCommand('formatBlock', 'H5')}><span className={styles.headingLabel}>H5</span></button>
         </div>
         <div className={styles.toolbarGroup}>
-          <button className={styles.toolbarButton} onClick={() => {
+          <button className={styles.toolbarButton} title="Insert Link" onClick={() => {
             const url = prompt("Enter Link URL:");
             if (url) execCommand('createLink', url);
           }}>🔗</button>
-          <button className={styles.toolbarButton} onClick={() => execCommand('insertUnorderedList')}>•</button>
-          <button className={styles.toolbarButton} onClick={() => execCommand('insertOrderedList')}>1.</button>
-          <button className={styles.toolbarButton} onClick={() => execCommand('formatBlock', 'blockquote')}>"</button>
+          
+          <button className={styles.toolbarButton} title="Insert Image" onClick={() => fileInputRef.current?.click()}>
+            <ImageIcon size={18} />
+          </button>
+          <input 
+            type="file" 
+            ref={fileInputRef} 
+            hidden 
+            accept="image/*" 
+            onChange={handleImageInsert} 
+          />
+
+          <button className={styles.toolbarButton} title="Unordered List" onClick={() => execCommand('insertUnorderedList')}>•</button>
+          <button className={styles.toolbarButton} title="Ordered List" onClick={() => execCommand('insertOrderedList')}>1.</button>
+          <button className={styles.toolbarButton} title="Quote" onClick={() => execCommand('formatBlock', 'blockquote')}>"</button>
         </div>
         <div className={styles.toolbarGroup}>
            <button className={styles.toolbarButton} onClick={() => execCommand('undo')}>↶</button>

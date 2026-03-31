@@ -199,11 +199,29 @@
   border: none;
   outline: none;
   font-size: 16px;
-  line-height: 1.6;
-  color: #555;
+  line-height: 1.8;
+  color: #444;
   padding: 20px 0;
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+.editableContent img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  margin: 40px auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+}
+
+.editableContent blockquote {
+  border-left: 4px solid #FF5C00;
+  padding-left: 24px;
+  margin: 32px 0;
+  font-style: italic;
+  color: #666;
+  font-size: 18px;
 }
 
 .editableContent:empty::before {
