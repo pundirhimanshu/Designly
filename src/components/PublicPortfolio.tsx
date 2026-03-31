@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./Dashboard.module.css";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Building2 } from "lucide-react";
 import BrandingBadge from "./BrandingBadge";
 import AnimatedCursor from "./AnimatedCursor";
 import { BRAND_COLORS } from "@/constants/brandColors";
@@ -190,7 +191,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
                 {experiences.map((exp: any) => (
                   <div key={exp.id} className={styles.experienceItem}>
                     <div className={styles.expDate}>{exp.fromDate} - {exp.currentlyWorking ? "Present" : exp.toDate}</div>
-                    <div className={styles.expLogo}><img src="https://designly.co.in/Bag.png" alt="Work" width="20" height="20" /></div>
+                    <div className={styles.expLogo}><Building2 size={24} color="#666" /></div>
                     <div className={styles.expInfo}>
                       <div className={styles.expCompany}>{exp.company}</div>
                       <div className={styles.expRole}>{exp.designation}</div>
