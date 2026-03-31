@@ -31,7 +31,7 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`/api/work/get?id=${id}`);
+        const res = await fetch(`/api/work/get?id=${id}&t=${Date.now()}`, { cache: 'no-store' });
         if (res.ok) {
           const json = await res.json();
           setData({
@@ -44,9 +44,7 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
             platform: json.platform || "",
             content: json.content || "",
           });
-          if (editorRef.current) {
-            editorRef.current.innerHTML = json.content || "";
-          }
+          // We no longer set innerHTML here as the ref might not be attached during loading
         }
       } catch (e) {
         console.error("Failed to fetch case study:", e);
@@ -56,6 +54,16 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
     };
     fetchData();
   }, [id]);
+
+  // Handle initial content sync after editor is fully mounted and loading is done
+  React.useEffect(() => {
+    if (!loading && data.content && editorRef.current) {
+      // Only inject if the editor is currently empty or contains just the placeholder
+      if (editorRef.current.innerHTML === "" || editorRef.current.innerHTML === "<br>") {
+        editorRef.current.innerHTML = data.content;
+      }
+    }
+  }, [loading, data.content]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -86,8 +94,8 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
   const handleImageInsert = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Please select an image smaller than 2MB.");
+      if (file.size > 4 * 1024 * 1024) { // Increased to 4MB for high-res support
+        alert("Please select an image smaller than 4MB.");
         return;
       }
       const reader = new FileReader();
