@@ -100,6 +100,10 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
   const { user, works, testimonials, experiences } = data;
   const motionTransform = user.backgroundMotion ? `scale(${1.1 + scrollY * 0.0004})` : 'scale(1)';
 
+  // Determine if we are on a subdomain view to avoid double-routing 404s
+  const isSubdomain = typeof window !== 'undefined' && 
+    !["designly.co.in", "www.designly.co.in", "localhost:3000", "designly-five.vercel.app"].includes(window.location.host);
+
   return (
     <>
       <AnimatedCursor type={user.customCursor} />
@@ -164,7 +168,10 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
                     key={work.id} 
                     className={styles.projectCard} 
                     style={{ cursor: 'pointer' }}
-                    onClick={() => router.push(`/${domain}/work/${work.id}`)}
+                    onClick={() => {
+                        const path = isSubdomain ? `/work/${work.id}` : `/${domain}/work/${work.id}`;
+                        router.push(path);
+                    }}
                   >
                     <div className={styles.projectThumb}>
                       <img src={work.image || "https://designly.co.in/ST1.png"} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
