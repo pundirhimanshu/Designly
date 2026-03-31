@@ -25,8 +25,9 @@ export default async function middleware(req: NextRequest) {
   
   const subdomain = hostname.split(".")[0].toLowerCase();
 
-  // If we are on the main domain or a system subdomain, do nothing
-  if (allowedDomains.includes(hostname) || subdomain === "www") {
+  // If we are on the main domain or it's an IP address, do nothing
+  const isIP = /^(\d{1,3}\.){3}\d{1,3}$/.test(hostname.split(':')[0]);
+  if (allowedDomains.includes(hostname) || subdomain === "www" || isIP) {
     return NextResponse.next();
   }
 

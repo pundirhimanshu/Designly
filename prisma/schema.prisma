@@ -59,6 +59,7 @@ model User {
   backgroundBlur  Int?     @default(0)
   backgroundMotion Boolean? @default(false)
   customCursor     String?  @default("default")
+  welcomeEmailSent Boolean  @default(false)
   updatedAt        DateTime @updatedAt
 }
 

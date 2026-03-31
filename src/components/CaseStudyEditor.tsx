@@ -46,7 +46,6 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
             platform: json.platform || "",
             content: json.content || "",
           });
-          // We no longer set innerHTML here as the ref might not be attached during loading
         }
       } catch (e) {
         console.error("Failed to fetch case study:", e);
@@ -57,10 +56,8 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
     fetchData();
   }, [id]);
 
-  // Handle initial content sync after editor is fully mounted and loading is done
   React.useEffect(() => {
     if (!loading && data.content && editorRef.current) {
-      // Only inject if the editor is currently empty or contains just the placeholder
       if (editorRef.current.innerHTML === "" || editorRef.current.innerHTML === "<br>") {
         editorRef.current.innerHTML = data.content;
       }
@@ -96,14 +93,13 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
   const handleImageInsert = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 4 * 1024 * 1024) { // Increased to 4MB for high-res support
+      if (file.size > 4 * 1024 * 1024) { 
         alert("Please select an image smaller than 4MB.");
         return;
       }
       const reader = new FileReader();
       reader.onloadend = () => {
         const dataUrl = reader.result as string;
-        // Focus the editor before inserting
         if (editorRef.current) {
           editorRef.current.focus();
           execCommand('insertImage', dataUrl);
@@ -111,7 +107,6 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
       };
       reader.readAsDataURL(file);
     }
-    // Clear the input so the same file can be selected again
     e.target.value = "";
   };
 
@@ -120,7 +115,6 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
     if (target.tagName === 'IMG') {
       const img = target as HTMLImageElement;
       setSelectedImage(img);
-      // Position relative to the parent richContent container
       setOverlayPos({
         top: img.offsetTop + 10,
         left: img.offsetLeft + img.offsetWidth - 40
