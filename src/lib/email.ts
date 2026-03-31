@@ -29,6 +29,7 @@ export async function sendWelcomeEmail(toEmail: string, name: string, publicUrl:
         <body>
           <div class="container">
             <div class="header">
+              <img src="https://designly.co.in/Designly.png" alt="Designly Logo" style="width: 120px; margin-bottom: 24px;">
               <h1>CONGRATULATIONS! 🚀</h1>
             </div>
             <div class="content">
