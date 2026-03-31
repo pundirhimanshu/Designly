@@ -224,6 +224,31 @@
   font-size: 18px;
 }
 
+.imageDeleteBtn {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff4d4d;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 10;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageDeleteBtn:hover {
+  background: #ff4d4d;
+  color: white;
+  transform: scale(1.1);
+  border-color: #ff4d4d;
+}
+
 .editableContent:empty::before {
   content: attr(data-placeholder);
   color: #ccc;

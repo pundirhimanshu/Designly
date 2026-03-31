@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./CaseStudyEditor.module.css";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, User, Sparkles, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, User, Sparkles, Image as ImageIcon, Trash2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CaseStudyEditorProps {
@@ -27,6 +27,8 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
 
   const editorRef = React.useRef<HTMLDivElement>(null);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [selectedImage, setSelectedImage] = React.useState<HTMLImageElement | null>(null);
+  const [overlayPos, setOverlayPos] = React.useState({ top: 0, left: 0 });
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -111,6 +113,28 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
     }
     // Clear the input so the same file can be selected again
     e.target.value = "";
+  };
+
+  const handleEditorClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'IMG') {
+      const img = target as HTMLImageElement;
+      setSelectedImage(img);
+      // Position relative to the parent richContent container
+      setOverlayPos({
+        top: img.offsetTop + 10,
+        left: img.offsetLeft + img.offsetWidth - 40
+      });
+    } else {
+      setSelectedImage(null);
+    }
+  };
+
+  const removeImage = () => {
+    if (selectedImage) {
+      selectedImage.remove();
+      setSelectedImage(null);
+    }
   };
 
   if (loading) {
@@ -202,13 +226,32 @@ export default function CaseStudyEditor({ id }: CaseStudyEditorProps) {
           </div>
         </section>
 
-        <section className={styles.richContent}>
+        <section className={styles.richContent} style={{ position: 'relative' }}>
            <div 
              ref={editorRef}
              className={styles.editableContent}
              contentEditable
+             onClick={handleEditorClick}
              data-placeholder="Start typing your case study story here..."
            />
+           <AnimatePresence>
+             {selectedImage && (
+               <motion.button
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 exit={{ opacity: 0, scale: 0.8 }}
+                 className={styles.imageDeleteBtn}
+                 style={{ top: overlayPos.top, left: overlayPos.left }}
+                 title="Remove Image"
+                 onClick={(e) => {
+                   e.stopPropagation();
+                   removeImage();
+                 }}
+               >
+                 <Trash2 size={16} />
+               </motion.button>
+             )}
+           </AnimatePresence>
         </section>
       </main>
 
