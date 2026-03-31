@@ -24,7 +24,7 @@ export default function BrandingBadge() {
       onClick={() => window.location.href = "/"}
     >
       <span className={styles.text}>MADE WITH</span>
-      <img src="/Designly.png" alt="Designly" className={styles.logo} />
+      <img src="https://designly.co.in/Designly.png" alt="Designly" className={styles.logo} />
     </motion.div>
   );
 }

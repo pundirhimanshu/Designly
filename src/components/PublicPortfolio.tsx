@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import BrandingBadge from "./BrandingBadge";
 import AnimatedCursor from "./AnimatedCursor";
+import { BRAND_COLORS } from "@/constants/brandColors";
 
 interface PublicPortfolioProps {
   domain: string;
@@ -118,7 +119,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
         {/* Header / Nav */}
         <header className={styles.nav}>
           <div className={styles.logo}>
-            <img src="/Designly.png" alt="Designly" width="120" height="40" />
+            <img src="https://designly.co.in/Designly.png" alt="Designly" width="120" height="40" />
           </div>
           <div className={styles.navRight}>
              {user.contactEmail && <a href={`mailto:${user.contactEmail}`} className={styles.launchBtn} style={{ textDecoration: 'none' }}>Work with me</a>}
@@ -130,7 +131,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
           <section className={styles.sectionCard}>
             <div className={styles.profileMain}>
               <div className={`${styles.mainAvatar} ${styles.animatedAvatar}`}>
-                <img src={user.image || "/A1.png"} alt={user.name} />
+                <img src={user.image || "https://designly.co.in/A1.png"} alt={user.name} />
               </div>
               <div className={styles.info}>
                 <div className={styles.nameRow}>
@@ -165,7 +166,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
                     onClick={() => router.push(`/${domain}/work/${work.id}`)}
                   >
                     <div className={styles.projectThumb}>
-                      <img src={work.image || "/ST1.png"} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={work.image || "https://designly.co.in/ST1.png"} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div className={styles.projectInfo}>
                       <div>
@@ -189,7 +190,7 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
                 {experiences.map((exp: any) => (
                   <div key={exp.id} className={styles.experienceItem}>
                     <div className={styles.expDate}>{exp.fromDate} - {exp.currentlyWorking ? "Present" : exp.toDate}</div>
-                    <div className={styles.expLogo}><img src="/Bag.png" alt="Work" width="20" height="20" /></div>
+                    <div className={styles.expLogo}><img src="https://designly.co.in/Bag.png" alt="Work" width="20" height="20" /></div>
                     <div className={styles.expInfo}>
                       <div className={styles.expCompany}>{exp.company}</div>
                       <div className={styles.expRole}>{exp.designation}</div>
@@ -210,7 +211,12 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
                 <div className={styles.toolsMarqueeContent}>
                   {[...JSON.parse(user.tools), ...JSON.parse(user.tools)].map((tool: any, i: number) => (
                     <div key={i} className={styles.toolIcon}>
-                      <img src={`https://cdn.simpleicons.org/${tool.slug}`} alt={tool.name} width="32" height="32" />
+                      <img 
+                        src={`https://api.iconify.design/simple-icons:${tool.slug}.svg?color=${encodeURIComponent(BRAND_COLORS[tool.slug] || '#111111')}`} 
+                        alt={tool.name} 
+                        width="32" 
+                        height="32" 
+                      />
                       <span style={{ fontSize: '11px', fontWeight: 600 }}>{tool.name}</span>
                     </div>
                   ))}
@@ -227,10 +233,10 @@ export default function PublicPortfolio({ domain }: PublicPortfolioProps) {
               </div>
               <div className={styles.marqueeContainer}>
                 <div className={styles.marqueeContent}>
-                  {[...testimonials, ...testimonials].map((test: any, i: number) => (
+                   {[...testimonials, ...testimonials].map((test: any, i: number) => (
                     <div key={i} className={styles.testimonialCard}>
                        <div className={styles.testimonialAuthor}>
-                         <img src={test.image || "/A2.png"} alt={test.name} className={styles.authorThumb} />
+                         <img src={test.image || "https://designly.co.in/A2.png"} alt={test.name} className={styles.authorThumb} />
                          <div>
                            <div className={styles.authorName}>{test.name}</div>
                            <div className={styles.authorRole}>{test.role}</div>
