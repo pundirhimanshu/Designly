@@ -37,6 +37,12 @@ export default function Home() {
       </header>
 
       <main className={styles.hero}>
+        <div className={styles.phBadge}>
+          <a href="https://www.producthunt.com/products/designly-3?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-designly-3" target="_blank" rel="noopener noreferrer">
+            <img alt="Designly - No Need of Paper Resume Just Build Portfolio on Designly. | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1113025&theme=light&t=1775025546851" />
+          </a>
+        </div>
+
         <div className={styles.badge}>
           <span role="img" aria-label="thumbs up">👍</span>
           <span style={{ marginLeft: '8px' }}>BEST FOR</span>
